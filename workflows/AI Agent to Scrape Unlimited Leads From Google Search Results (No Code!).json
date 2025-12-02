@@ -1,0 +1,605 @@
+{
+  "name": "AI Agent to Scrape Unlimited Leads From Google Search Results (No Code!)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "16ae699c-5d71-4c93-af7d-c8693793b4a2",
+      "name": "When clicking 'Test workflow'",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -656,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=https://r.jina.ai/{{ $json.formattedUrl }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "2fef8316-f75b-42fa-96a6-424c47a6c6f2",
+      "name": "Get Website Detail",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        672,
+        48
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "sOqDwGd2xE0ZeG4l",
+          "name": "Header Auth Jina Search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst updatedItems = items.map((item) => {\n  const content = item?.json?.choices[0]?.message?.content;\n  try {\n    const contentJson = JSON.parse(content);\n    item.json.choices[0].message.content = contentJson;\n  } catch (error) {\n    console.log(\"Error parsing content to JSON:\", error);\n  }\n  return item;\n});\nreturn updatedItems;\n"
+      },
+      "id": "06b66140-36ea-4f22-8d14-1ea16174d1e0",
+      "name": "Convert to JSON Object",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5dd49fba-83da-4a1a-b8e4-770451d0b186",
+              "name": "Search Terms",
+              "value": "Fitness Center",
+              "type": "string"
+            },
+            {
+              "id": "58b1bc61-5d6c-4714-b33e-ee184a6f7ff3",
+              "name": "Site Filter",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "6c92ecd0-626f-4e31-a4fc-9ea1f11e2318",
+              "name": "Type",
+              "value": "email",
+              "type": "string"
+            },
+            {
+              "id": "d228ebaf-7510-4d42-ab8d-874d451ab838",
+              "name": "Language",
+              "value": "en",
+              "type": "string"
+            },
+            {
+              "id": "4ce297fd-7eae-43a7-b02a-5b916060d1e7",
+              "name": "Location",
+              "value": "countryUS",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "55c2069b-c657-4069-aa1e-37bc4fb56b14",
+      "name": "Category",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -496,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "items",
+        "options": {}
+      },
+      "id": "8d00afc7-580c-4322-a709-c9fdcfa7c1f5",
+      "name": "Split Out",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        416,
+        48
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Google Search Data",
+        "height": 558.152466348206,
+        "width": 1627.7468922027629,
+        "color": 7
+      },
+      "id": "f3e60c20-e576-492f-acfa-d5b06a08fa5b",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -736,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const startIndexes = [];\nfor (let i = 1; i <= 11; i += 10) {\n  startIndexes.push(i);\n}\nreturn { startIndexes };\n"
+      },
+      "id": "686c55b4-54c6-47c7-9659-a0e9fc69908e",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -336,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "startIndexes",
+        "options": {}
+      },
+      "id": "c3a4610b-3d87-47ba-b0d8-a1f73c9c07a5",
+      "name": "Split Out1",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "aefc662f-0b0a-475d-a2fe-82d1fbfc7350",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -16,
+        16
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://customsearch.googleapis.com/customsearch/v1",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('Category').item.json['Search Terms'] }} {{ $('Category').item.json.Type }} {{ $('Category').item.json['Site Filter'] }}"
+            },
+            {
+              "name": "cx"
+            },
+            {
+              "name": "start",
+              "value": "={{ $json.startIndexes }}"
+            },
+            {
+              "name": "lr",
+              "value": "={{ $('Category').item.json.Language }}"
+            },
+            {
+              "name": "gl",
+              "value": "={{ $('Category').item.json.Location }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c6cb1b6a-60b3-4651-88b1-20437a7a044d",
+      "name": "Google Search",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        176,
+        48
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "T5qW7yKLGaRsTrfZ",
+          "name": "Query Auth google search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1rsv9PRhQB3olBMOG3PcwX2zyZBTbU20qIlLSQP3U2eU",
+          "mode": "list",
+          "cachedResultName": "Company Scraper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rsv9PRhQB3olBMOG3PcwX2zyZBTbU20qIlLSQP3U2eU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1246120630,
+          "mode": "list",
+          "cachedResultName": "Fitness center-us",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rsv9PRhQB3olBMOG3PcwX2zyZBTbU20qIlLSQP3U2eU/edit#gid=1246120630"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Company Name": "={{ $json.choices[0].message.content['Company Name'] }}",
+            "Company Category": "={{ $json.choices[0].message.content['Company Category'] }}",
+            "Company Number": "={{ $json.choices[0].message.content['Contact Number'] }}",
+            "Company Address": "={{ $json.choices[0].message.content['Company Address'] }}",
+            "Company Email": "={{ $json.choices[0].message.content['Company Email'] }}",
+            "Company Logo URL": "={{ $json.choices[0].message.content['Company Logo URL'] }}",
+            "Company Summary": "={{ $json.choices[0].message.content['Company Summary'] }}",
+            "Company Website": "={{ $json.choices[0].message.content['Company URL'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Company Name",
+              "displayName": "Company Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Category",
+              "displayName": "Company Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Number",
+              "displayName": "Company Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Address",
+              "displayName": "Company Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Email",
+              "displayName": "Company Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Summary",
+              "displayName": "Company Summary",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Company Logo URL",
+              "displayName": "Company Logo URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Logo",
+              "displayName": "Company Logo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Company Website",
+              "displayName": "Company Website",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0a357565-f19a-4e43-9819-488045aa09fa",
+      "name": "Save Records",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        736,
+        224
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ixlQeqkv6etZGRXt",
+          "name": "599"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f7ae58d8-79a6-452e-8f2f-b3f93aa8e4b8",
+              "leftValue": "={{ $json.choices[0].message.content['Content Relevant'] }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "1494f4a8-d739-4d77-9376-9ba58e5ad62c",
+      "name": "If Relevant",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        336,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "89474f66-c538-4fd1-9a42-0d154b1e9e92",
+              "leftValue": "={{ $json.choices[0].message.content['Contact Number'] }}",
+              "rightValue": "N/A",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "aa70dc74-13e5-4afc-97f0-df9db3127362",
+              "leftValue": "={{ $json.choices[0].message.content['Company Email'] }}",
+              "rightValue": "N/A",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "a80438e7-b08d-4ec1-9ac5-06703759526a",
+      "name": "If Email or Number",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.deepseek.com/chat/completions",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"deepseek-chat\",\n  \"response_format\": {\n      \"type\": \"json_object\"\n  },\n  \"messages\": [\n          {\"role\": \"system\", \"content\": {{\nJSON.stringify(`You are a web scraper analysis. Try to format the following information into the following format. If the JSON field not existed, return \"N/A\" of the field.\n\n*** The contact number in 12124567890 format\n*** If it doesnt have sufficient contact detail, \"Content Relevant\" retrun false\n*** If it is not related to $('Category').item.json['Search Terms'], \"Content Relevant\" retrun false\n\nEXAMPLE JSON OUTPUT:\n{\n    \"Company Name\": \"Proxa\",\n    \"Company Category\": \"Food and Drink\",\n    \"Contact Number\": \"12124567890\",\n    \"Company Address\": \"RM 2305, Trend Centre, Chai Wan\",\n    \"Company Email\": \"N/A\",\n    \"Company Summary\": \"Proxa is a restaurant in Hong Kong\",\n    \"Company Logo URL\": \"https://proxa.com/logo.png\",\n    \"Company URL\": \"N/A\",\n    \"Content Relevant\": false,\n}\n`)\n}}},\n          {\"role\": \"user\", \"content\": {{ JSON.stringify($json.data) }}}\n        ],\n  \"stream\": false\n}",
+        "options": {}
+      },
+      "id": "39e41ee6-4984-47f3-8c58-c5f16cab02e8",
+      "name": "Convert to JSON string",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        32,
+        256
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "IuXlUmB4EmR6ogtr",
+          "name": "Header deep seek"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking 'Test workflow'": {
+      "main": [
+        [
+          {
+            "node": "Category",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Website Detail": {
+      "main": [
+        [
+          {
+            "node": "Convert to JSON string",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to JSON Object": {
+      "main": [
+        [
+          {
+            "node": "If Relevant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Category": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Get Website Detail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Google Search",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Search": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Relevant": {
+      "main": [
+        [
+          {
+            "node": "If Email or Number",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If Email or Number": {
+      "main": [
+        [
+          {
+            "node": "Save Records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Records": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to JSON string": {
+      "main": [
+        [
+          {
+            "node": "Convert to JSON Object",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "bf9b8a00-5d2a-439a-bc1f-6f2eaaf04d73",
+  "meta": {
+    "instanceId": "eef64364cc745a778f6405399bf50f9a08706228bcd2692a1db0fa764b608f15"
+  },
+  "id": "uPE4dzxFFu51Djky",
+  "tags": []
+}

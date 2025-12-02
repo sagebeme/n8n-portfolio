@@ -13,7 +13,7 @@ const StructuredData = () => {
     "alternateName": "sagebeme",
     "url": typeof window !== 'undefined' ? window.location.origin : '',
     "image": typeof window !== 'undefined' ? `${window.location.origin}/https://github.com/sagebeme.png` : '',
-    "jobTitle": "Fullstack Software Engineer & Workflow Automation Specialist",
+    "jobTitle": "AI Agent Expert & Workflow Automation Specialist",
     "worksFor": {
       "@type": "Organization",
       "name": "Freelance"
@@ -28,14 +28,14 @@ const StructuredData = () => {
       "https://github.com/sagebeme"
     ],
     "knowsAbout": [
-      "Fullstack Development",
-      "Backend Engineering",
-      "DevOps",
+      "AI Agents",
       "Workflow Automation",
-      "API Integration",
+      "Intelligent Automation",
+      "Autonomous Agents",
       "n8n",
+      "OpenAI",
       "Airtable",
-      "OpenAI"
+      "API Integration"
     ]
   };
 

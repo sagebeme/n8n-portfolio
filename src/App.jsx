@@ -19,7 +19,7 @@ function App() {
             <Route path="/projects/:id" element={<ProjectDetail />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
-        </div>
+      </div>
       </Router>
     </ThemeProvider>
   );

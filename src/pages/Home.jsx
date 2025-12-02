@@ -8,9 +8,9 @@ const Home = () => {
   return (
     <>
       <SEO
-        title="sagebeme - Fullstack Software Engineer & Workflow Automation Specialist"
-        description="Fullstack software engineer and workflow automation specialist. Expert in building scalable applications, backend development, DevOps, n8n, Airtable, and OpenAI integrations. Based in East Africa."
-        keywords="fullstack developer, software engineer, workflow automation, n8n, Airtable, API integration, OpenAI, backend development, DevOps, East Africa, sagebeme"
+        title="sagebeme - AI Agent Expert & Workflow Automation Specialist"
+        description="AI Agent expert specializing in building intelligent automation workflows and AI-powered agents. Expert in n8n, OpenAI, Airtable, and creating autonomous systems that transform business operations. Based in East Africa."
+        keywords="AI agent expert, workflow automation, AI agents, n8n, OpenAI, intelligent automation, autonomous agents, workflow optimization, Airtable, East Africa, sagebeme"
         url="/"
         image="https://github.com/sagebeme.png"
       />

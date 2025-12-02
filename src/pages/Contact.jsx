@@ -6,9 +6,9 @@ const Contact = () => {
   return (
     <>
       <SEO
-        title="Contact - sagebeme | Get In Touch"
-        description="Get in touch with sagebeme for workflow automation, fullstack development, backend engineering, and DevOps solutions. Based in East Africa."
-        keywords="contact, hire developer, workflow automation consultant, fullstack developer, East Africa"
+        title="Contact - sagebeme | AI Agent Expert"
+        description="Get in touch with sagebeme for AI Agent development, workflow automation, and intelligent automation solutions. Based in East Africa."
+        keywords="contact, hire AI agent expert, workflow automation consultant, AI automation specialist, East Africa"
         url="/contact"
       />
       <StructuredData />

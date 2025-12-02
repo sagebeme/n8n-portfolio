@@ -6,7 +6,7 @@ const AboutMe = () => {
           <div className="about-image">
             <img 
               src="https://github.com/sagebeme.png" 
-              alt="sagebeme - Fullstack Software Engineer & Workflow Automation Specialist" 
+              alt="sagebeme - AI Agent Expert & Workflow Automation Specialist" 
               className="profile-photo"
               loading="eager"
               onError={(e) => {
@@ -27,31 +27,35 @@ const AboutMe = () => {
             <h1 className="profile-name">sagebeme</h1>
             <p className="about-location">📍 East Africa</p>
             <p className="about-description">
-              I'm a fullstack software engineer and workflow automation specialist, helping startups and SMBs 
-              build scalable applications and streamline operations through intelligent automation solutions. 
-              With expertise in fullstack development, DevOps, and automation tools like n8n, Airtable, and OpenAI, 
-              I build systems that save time, reduce errors, and scale businesses efficiently.
+              I'm an AI Agent expert specializing in building intelligent automation workflows and AI-powered agents 
+              that transform business operations. I help startups and SMBs create autonomous systems using n8n, OpenAI, 
+              and advanced workflow automation tools. My AI agents handle complex tasks, make intelligent decisions, 
+              and integrate seamlessly across platforms to save time, reduce errors, and scale businesses efficiently.
             </p>
-            <div className="experience-section">
-              <h3>Notable Projects</h3>
-              <ul className="experience-list">
-                <li><strong>Verido Dashboard</strong> - Fullstack development</li>
-                <li><strong>Tyde Real Estate</strong> - Backend & DevOps</li>
-                <li><strong>TWSolarSolutions</strong> - Fullstack development</li>
-                <li><strong>The Social Hub</strong> - Trainer & Mentor (Innovation, Entrepreneurship, Leadership & Design Thinking)</li>
-              </ul>
+            <div className="cv-link-section">
+              <p>
+                <strong>Looking for my software engineering portfolio?</strong>
+              </p>
+              <a 
+                href="https://sagebeme.github.io/CV" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="cv-link"
+              >
+                View Software Engineering CV →
+              </a>
             </div>
             <div className="skills">
-              <h3>Skills</h3>
+              <h3>AI Agent & Automation Expertise</h3>
               <div className="skills-list">
-                <span className="skill-tag">Fullstack Development</span>
-                <span className="skill-tag">Backend Engineering</span>
-                <span className="skill-tag">DevOps</span>
+                <span className="skill-tag">AI Agents</span>
                 <span className="skill-tag">Workflow Automation</span>
-                <span className="skill-tag">API Integration</span>
                 <span className="skill-tag">n8n</span>
+                <span className="skill-tag">OpenAI Integration</span>
+                <span className="skill-tag">AI-Powered Workflows</span>
+                <span className="skill-tag">Intelligent Automation</span>
                 <span className="skill-tag">Airtable</span>
-                <span className="skill-tag">OpenAI</span>
+                <span className="skill-tag">API Integration</span>
                 <span className="skill-tag">HubSpot</span>
                 <span className="skill-tag">LinkedIn API</span>
                 <span className="skill-tag">Webhooks</span>

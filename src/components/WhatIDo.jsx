@@ -4,40 +4,35 @@ const WhatIDo = () => {
       <div className="container">
         <h2>What I Do</h2>
         <p className="section-intro">
-          I help businesses build scalable applications, automate workflows, and integrate systems 
-          to improve efficiency and reduce manual work. Here's what I specialize in:
+          I specialize in building AI Agents and intelligent automation workflows that transform how businesses operate. 
+          Here's what I focus on:
         </p>
         <div className="services-grid">
           <div className="service-card">
             <div className="service-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polyline points="16 18 22 12 16 6" />
-                <polyline points="8 6 2 12 8 18" />
+                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                <path d="M2 17l10 5 10-5" />
+                <path d="M2 12l10 5 10-5" />
               </svg>
             </div>
-            <h3>Fullstack Development</h3>
+            <h3>AI Agent Development</h3>
             <p>
-              Build end-to-end applications from frontend to backend, creating scalable and maintainable 
-              solutions using modern frameworks and best practices.
+              Build intelligent AI agents that can autonomously handle complex tasks, make decisions, 
+              and interact with multiple systems to automate entire business processes.
             </p>
           </div>
           <div className="service-card">
             <div className="service-icon">
               <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
-                <line x1="7" y1="2" x2="7" y2="22" />
-                <line x1="17" y1="2" x2="17" y2="22" />
-                <line x1="2" y1="12" x2="22" y2="12" />
-                <line x1="2" y1="7" x2="7" y2="7" />
-                <line x1="2" y1="17" x2="7" y2="17" />
-                <line x1="17" y1="17" x2="22" y2="17" />
-                <line x1="17" y1="7" x2="22" y2="7" />
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
               </svg>
             </div>
-            <h3>Backend & DevOps</h3>
+            <h3>Intelligent Workflow Automation</h3>
             <p>
-              Design robust backend architectures, implement CI/CD pipelines, and manage infrastructure 
-              for reliable, scalable applications with automated deployment workflows.
+              Design and implement AI-powered workflows that learn, adapt, and optimize themselves 
+              to continuously improve business operations and decision-making.
             </p>
           </div>
           <div className="service-card">
@@ -79,7 +74,7 @@ const WhatIDo = () => {
             <h3>AI-Driven Workflows</h3>
             <p>
               Leverage OpenAI and other AI services to create intelligent automation that can 
-              process content, make decisions, and generate insights automatically.
+              process content, make decisions, generate insights, and learn from patterns automatically.
             </p>
           </div>
           <div className="service-card">
@@ -90,18 +85,18 @@ const WhatIDo = () => {
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
               </svg>
             </div>
-            <h3>API Integrations</h3>
+            <h3>Multi-Platform AI Integration</h3>
             <p>
-              Connect various platforms like HubSpot, LinkedIn, payment processors, and more 
-              through custom API integrations and webhooks.
+              Connect AI agents across platforms like HubSpot, LinkedIn, Airtable, payment processors, 
+              and more through intelligent API integrations and webhooks.
             </p>
           </div>
         </div>
         <div className="target-audience">
           <p>
-            <strong>I work with:</strong> Startups and SMBs looking to build scalable applications, 
-            automate repetitive tasks, improve data flow between systems, and scale their operations 
-            without proportionally increasing manual work.
+            <strong>I work with:</strong> Startups and SMBs looking to implement AI agents and intelligent automation 
+            to handle complex workflows, automate decision-making processes, improve data flow between systems, 
+            and scale their operations with autonomous AI-powered solutions.
           </p>
         </div>
       </div>

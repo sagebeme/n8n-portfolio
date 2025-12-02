@@ -1,0 +1,777 @@
+{
+  "name": "11. Email Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -816,
+        704
+      ],
+      "id": "149410cb-d110-4ece-9b7e-ca8106d59799",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.snippet }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "High Priority",
+              "description": "=You are an email label assistant.  \nDetermine whether the following message should be labeled “High Priority.”  \n“High Priority” means it is urgent, flagged or starred, from a VIP (executive, key client), or contains language demanding immediate action (e.g., “urgent,” “ASAP,” “sign off by EOD”).  \n"
+            },
+            {
+              "category": "Finance/Billing",
+              "description": "=You are an email Label assistant. \n\nDecide if the following message should be labeled “Finance/Billing.”  \n“Finance/Billing” covers invoices, billing statements, payment requests, account charges, or communications from your accounting/finance department domain.  \n"
+            },
+            {
+              "category": "Customer Support",
+              "description": "=You are an email Label assistant.  \n\nDecide if the following message should be labeled “Customer Support.”  \n“Customer Support” covers help tickets, bug reports, troubleshooting questions, or any request for assistance, especially from a support portal domain.  \n"
+            },
+            {
+              "category": "Promotion",
+              "description": "=You are an email Label assistant.  \n\nDecide if the following message should be labeled “Promotion.”  \n“Promotion” covers marketing messages, discount offers, sales announcements, newsletters, and any mail containing unsubscribe links.  \n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        704
+      ],
+      "id": "a600601d-c7d0-4fc0-8967-61a8e3d76721",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -512,
+        928
+      ],
+      "id": "a8185222-1130-4b5d-95a7-473209504f54",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_3643623435137076028"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        112
+      ],
+      "id": "2851e588-ee3e-4706-bc91-f09aaf1c5c3b",
+      "name": "High Priority Label Mark",
+      "webhookId": "bac23fb7-11e5-4b26-a8b6-ad6bcea2a843",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_7033054525123623542"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        512
+      ],
+      "id": "9a1265bb-bf24-4c8c-a322-09c24c667467",
+      "name": "Finance Label Mark",
+      "webhookId": "bac23fb7-11e5-4b26-a8b6-ad6bcea2a843",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_6694497367107323426"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        912
+      ],
+      "id": "dd958e9d-1fb9-4dee-b815-9ed881224289",
+      "name": "Customer Support Label Mark",
+      "webhookId": "bac23fb7-11e5-4b26-a8b6-ad6bcea2a843",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_7371839579966058978"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        1200
+      ],
+      "id": "925a6189-5f23-41be-9a7d-42eaead0a3bc",
+      "name": "Promotion Label Mark",
+      "webhookId": "bac23fb7-11e5-4b26-a8b6-ad6bcea2a843",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n\t\"type\": \"object\",\n\t\"properties\": {\n\t\t\"subject\": {\n\t\t\t\"type\": \"string\"\n\t\t},\n        \"body\": {\n\t\t\t\"type\": \"string\"\n\t\t}\n\t}\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        160,
+        224
+      ],
+      "id": "519c465f-7a4a-47e0-bac5-64ecdcb3e7f7",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Text Classifier').item.json.snippet }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an expert email drafting assistant. When given a “High Priority” message, your job is to compose a clear, professional, and concise reply on the user’s behalf. Your draft should:\n\n- Address every question or request raised in the original email.  \n- Use a respectful, business-appropriate tone.  \n- Clearly outline any next steps or action items.  \n- Include a suggested subject line. \n\nThe user will review and adjust your draft before sending it to the original sender.  \n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e0f6213d-2a93-4e79-bc70-136149dc9014",
+      "name": "Create Draft"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Text Classifier').item.json.snippet }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an expert email drafting assistant. When provided with a financial summary containing key details (invoice/reference number, amount due, due date, payment instructions, etc.), compose a clear, professional email to the Accounts team that:\n\n- Opens with a brief context line (e.g., “Please see the summary below from the latest finance communication.”)  \n- Presents the summary in concise bullet points.  \n- Clearly requests any necessary actions (e.g., “Please process payment by the due date” or “Confirm receipt of this invoice”).  \n- Closes with a polite sign-off and your name or role.\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        16,
+        400
+      ],
+      "id": "f1a8f7cc-7261-4e53-a557-a6bf6c8427c8",
+      "name": "Summarize"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        32,
+        224
+      ],
+      "id": "44c5dd2e-8310-4a12-9450-072527b0d94f",
+      "name": "Drafting Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        624
+      ],
+      "id": "49b9119b-4bdf-4b1f-99cd-e795f9b9f83e",
+      "name": "Summary Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "YOUR_EMAIL@example.com",
+        "subject": "={{ $json.output.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.output.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        384,
+        512
+      ],
+      "id": "5b25a025-f300-4f3e-a2b1-b934fdc2d22e",
+      "name": "Send Mail",
+      "webhookId": "a5340f9a-d380-49da-b534-84f0e7bbe067",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ $json.output.subject }}",
+        "message": "={{ $json.output.body }}",
+        "options": {
+          "sendTo": "={{ $('Gmail Trigger').item.json.From }}"
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        384,
+        112
+      ],
+      "id": "ca8e1ecf-dc61-4c8f-a47f-449b20b3ae11",
+      "name": "Draft Mail",
+      "webhookId": "23e7455d-3ef0-4c08-a553-5ff4e75f6648",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Text Classifier').item.json.snippet }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=You are an expert customer support email drafting assistant. When given a “Customer Support” message, your job is to compose a clear, empathetic, and solution-oriented reply on the user’s behalf. Your draft should:\n\n- Begin by acknowledging the customer’s issue or question.  \n- Restate or summarize their main concern to show understanding.  \n- Provide step-by-step guidance or the next steps you will take to resolve the issue.  \n- Offer any additional troubleshooting tips or resources if appropriate.  \n- Close with a friendly and helpful tone, inviting further questions as needed.  \n- Include a suggested subject line.\n\nThe user will review and adjust your draft before sending it to the original sender.\n \n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        0,
+        800
+      ],
+      "id": "9aab739b-f732-4473-bf0e-4533504edd36",
+      "name": "Customer Support Reply"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        96,
+        1024
+      ],
+      "id": "93592fda-d57f-4a1a-b293-dd7c99fb8ba8",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Text Classifier').item.json.From }}",
+        "subject": "={{ $json.output.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.output.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        384,
+        912
+      ],
+      "id": "75497db9-96db-4346-ab78-97e5333a6f54",
+      "name": "Auto Reply",
+      "webhookId": "78a1b452-05a3-48dc-8adf-70ae45ffc46b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Eon6kq20Fc7bpZTq",
+          "name": "gmail 5k"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a promotional email summarization assistant. When provided with a promotional message, extract and summarize the key marketing details in a concise, bullet-point format. Focus on elements such as:\n\n- Offer or deal description (e.g., “50% off spring sale”)  \n- Discount amount or percentage  \n- Promo code (if any)  \n- Validity date or expiration  \n- Call-to-action (e.g., “Shop now,” “Sign up”)  \n- Unsubscribe or opt-out instructions  \n\nOmit unrelated content and conversational fluff.\n\n**Input:**  \n{{ $('Text Classifier').item.json.snippet }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        0,
+        1200
+      ],
+      "id": "e0662edc-add4-4c0f-819f-37e59edfd046",
+      "name": "Promotion Summary",
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=You have got High Priority Mail from - {{ $('Text Classifier').item.json.From }} \n## Subject\n{{ $('Text Classifier').item.json.Subject }}\n\n## Actual Mail\n{{ $('Gmail Trigger').item.json.snippet }}\n\n## Draft Mail\n{{ $('Create Draft').item.json.output.body }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        112
+      ],
+      "id": "dca8bd4d-974d-47f2-9111-5151eaaccc9f",
+      "name": "Draft Mail Notify",
+      "webhookId": "5ae7c631-6cd8-4475-ad73-07f66173e011",
+      "credentials": {
+        "telegramApi": {
+          "id": "dsObddv3UT6EOYEE",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=You have got Finance related mail from - {{ $('Gmail Trigger').item.json.From }}\n\nWe have send the below summary of mail to Finance team\n{{ $('Summarize').item.json.output.body }}\n",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        512
+      ],
+      "id": "374256af-829b-4fed-b676-7492059d8702",
+      "name": "Mail Send Notify",
+      "webhookId": "5ae7c631-6cd8-4475-ad73-07f66173e011",
+      "credentials": {
+        "telegramApi": {
+          "id": "dsObddv3UT6EOYEE",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=You have got customer support mail from - {{ $('Gmail Trigger').item.json.From }}\n\nWe have auto replied below mail back:\n{{ $('Customer Support Reply').item.json.output.body }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        912
+      ],
+      "id": "5c10e607-abd5-4132-85bb-168f90b19169",
+      "name": "Auto Reply Notify",
+      "webhookId": "5ae7c631-6cd8-4475-ad73-07f66173e011",
+      "credentials": {
+        "telegramApi": {
+          "id": "dsObddv3UT6EOYEE",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=You have got Promotion Mail from - {{ $('Text Classifier').item.json.From }}\n\nHere is the Summary of the Mail:\n{{ $json.message.content }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        384,
+        1200
+      ],
+      "id": "adf8033f-01e7-4e28-9206-a2ff5c3ea7c9",
+      "name": "Promotion summary notify",
+      "webhookId": "5ae7c631-6cd8-4475-ad73-07f66173e011",
+      "credentials": {
+        "telegramApi": {
+          "id": "dsObddv3UT6EOYEE",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "High Priority Label Mark",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Finance Label Mark",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Customer Support Label Mark",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Promotion Label Mark",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "High Priority Label Mark": {
+      "main": [
+        [
+          {
+            "node": "Create Draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Create Draft",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "Summarize",
+            "type": "ai_outputParser",
+            "index": 0
+          },
+          {
+            "node": "Customer Support Reply",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Draft": {
+      "main": [
+        [
+          {
+            "node": "Draft Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finance Label Mark": {
+      "main": [
+        [
+          {
+            "node": "Summarize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize": {
+      "main": [
+        [
+          {
+            "node": "Send Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Drafting Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Create Draft",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summary Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Summarize",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Customer Support Label Mark": {
+      "main": [
+        [
+          {
+            "node": "Customer Support Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Customer Support Reply",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Customer Support Reply": {
+      "main": [
+        [
+          {
+            "node": "Auto Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Promotion Label Mark": {
+      "main": [
+        [
+          {
+            "node": "Promotion Summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Mail": {
+      "main": [
+        [
+          {
+            "node": "Mail Send Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Promotion Summary": {
+      "main": [
+        [
+          {
+            "node": "Promotion summary notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auto Reply": {
+      "main": [
+        [
+          {
+            "node": "Auto Reply Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft Mail": {
+      "main": [
+        [
+          {
+            "node": "Draft Mail Notify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a37f7e65-f9d2-459a-8fec-9ea72b97e46a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eef64364cc745a778f6405399bf50f9a08706228bcd2692a1db0fa764b608f15"
+  },
+  "id": "iTlyoSd41wHsq89N",
+  "tags": []
+}

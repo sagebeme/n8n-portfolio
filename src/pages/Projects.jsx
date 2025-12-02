@@ -7,9 +7,9 @@ const Projects = () => {
   return (
     <>
       <SEO
-        title="Projects - sagebeme Portfolio | Automation & Software Development"
-        description="Explore automation and software development projects including fullstack applications, workflow automation, API integrations, and DevOps solutions."
-        keywords="software projects, automation projects, fullstack development, workflow automation, n8n projects, API integration, DevOps projects"
+        title="AI Agent Projects - sagebeme Portfolio | Workflow Automation & AI Agents"
+        description="Explore AI Agent and workflow automation projects. Intelligent agents that autonomously handle business processes, make decisions, and optimize workflows using n8n, OpenAI, and advanced automation."
+        keywords="AI agent projects, workflow automation, AI agents, n8n automation, OpenAI integration, intelligent automation, autonomous agents, workflow optimization"
         url="/projects"
       />
       <StructuredData />
@@ -18,8 +18,8 @@ const Projects = () => {
         <div className="page-header">
           <h1>Projects</h1>
           <p className="page-intro">
-            Explore my automation and integration projects. Each solution is tailored to solve 
-            specific business challenges and improve operational efficiency.
+            Explore my AI Agent and workflow automation projects. Each AI agent is designed to autonomously 
+            handle complex business processes, make intelligent decisions, and continuously optimize operations.
           </p>
         </div>
         <div className="projects-grid">

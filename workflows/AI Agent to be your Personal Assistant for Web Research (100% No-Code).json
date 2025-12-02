@@ -1,0 +1,352 @@
+{
+  "name": "AI Agent to be your Personal Assistant for Web Research (100% No-Code)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "3704f932-a008-422b-bd1c-bad4ee779a05",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.manualChatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "7b9df245-e58c-4740-a45e-186f148b3ac1",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        304,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "b0e86b87-93f7-4cb5-8525-007a0097a4cf",
+      "name": "SERP Search Engine",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        80,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Google Search Tool\n*Remember to save before run for any changes",
+        "height": 285.6509203345433,
+        "width": 1164.0722488985814
+      },
+      "id": "d2b4bd54-40f0-40bf-aec7-75331d76f3bc",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "name": "serp_search",
+        "description": "This is a Google search tool based on user questions on searching.",
+        "workflowId": {
+          "__rl": true,
+          "value": "30tJ1PrHaEQ1sEE7",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/30tJ1PrHaEQ1sEE7",
+          "cachedResultName": "AI Agent to be your Personal Assistant for Web Research (100% No-Code)"
+        }
+      },
+      "id": "72e99db9-d501-4e23-a320-a08734aec115",
+      "name": "Google Search Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        208
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Main Chatbot",
+        "height": 478.1757112825508,
+        "width": 948.2906720613022,
+        "color": 4
+      },
+      "id": "aedd321a-d9a6-4e4d-abe1-daaf2425bb87",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "This is a web crawler, you can input URL for scrapping the website content.",
+        "url": "https://scrape.serper.dev",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "url"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "X-API-KEY",
+              "valueProvider": "fieldValue"
+            }
+          ]
+        }
+      },
+      "id": "03a2b827-ef41-42ab-9f05-198f6e868aa5",
+      "name": "Web Crawler",
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        592,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey"
+      },
+      "id": "e2c93adb-9b2c-45af-80f4-55c0fb41d149",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return { data: $input.all()[0].json.message.content\n  .replace(\"```\", \"\")\n  .replace(\"\\n\", \"\")}"
+      },
+      "id": "dbf7c40d-bdbd-42f9-a828-ea96e45b66d6",
+      "name": "URL Clean Up",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $('OpenAI Search URL Preparation').item.json.message.content }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-KEY"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        768,
+        640
+      ],
+      "id": "f5ebb7e8-0424-465e-a16c-0f3a0a03d9d7",
+      "name": "HTTP Request To Serper"
+    },
+    {
+      "parameters": {
+        "jsCode": "return { response: $input.all() };"
+      },
+      "id": "dbf1c4ea-b4cd-489f-b819-abee8958d3b9",
+      "name": "Result Parser",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=You are a research agent helping user to gather information from internet, here's the rules:\n\n1. Use the provided information by the tool to identify key insights, patterns, and trends.\n2. IMPORTANT: Always put the link url on ALL THE RESULT\n3. Include the image if provided by the search result on ALL THE RESULT\n4. Structure the response with clear sections, transitions\n5. Address conflicting information, explaining any differences\n6. You can use Google Search tools to search from Google result\n7. After searching, you can use Web Scrapper to get the details content of the website\n\n(Current time: {{ $now }})",
+          "maxIterations": 10,
+          "returnIntermediateSteps": true
+        }
+      },
+      "id": "cdb25ef7-66ee-466c-8ac9-538b3130d105",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        352,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a SERP searcher, you have following API to use:\n\nGeneral Search Tool: https://google.serper.dev/search\nImage Search Tool: https://google.serper.dev/images\nVideo Search Tool: https://google.serper.dev/videos\nPlaces Search Tool: https://google.serper.dev/places // Dont use it\nMaps Search Tool: https://google.serper.dev/maps\nReviews Search Tool: https://google.serper.dev/reviews\nNews Search Tool: https://google.serper.dev/news\nShopping Search Tool: https://google.serper.dev/shopping\nVisual Search Tool: https://google.serper.dev/lens\nAcademic Search Tool: https://google.serper.dev/scholar\nPatent Search Tool: https://google.serper.dev/patents\nSearch Suggestion Tool: https://google.serper.dev/autocomplete\n\nAnd folllowing query string options:\n{\n  \"q\": \"apple inc\",\n  \"location\": \"United States\",\n  \"num\": 20,\n  \"tbs\": \"qdr:w\"\n}\n\nRule of search:\n1. Choose the correct tool for user enquiry.\n2. When preparing the query, try to use keywords to search if it is possible.\n3. If user has specific requirement like \"site\", use Google Search Operators to make it accurate\n4. Base on user's question, prepare the full URL for searching the result.\n5. Only pass the URL to call without any explaination and ``` and \\n:\n\nUser Question:\n{{ $json.query }}\n\n\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c26f9b69-be69-49a1-8527-899c7c45c200",
+      "name": "OpenAI Search URL Preparation",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.6,
+      "position": [
+        272,
+        640
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SERP Search Engine": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Search URL Preparation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Search Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Web Crawler": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "URL Clean Up": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request To Serper",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request To Serper": {
+      "main": [
+        [
+          {
+            "node": "Result Parser",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Search URL Preparation": {
+      "main": [
+        [
+          {
+            "node": "URL Clean Up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2af0a130-d11c-48af-845d-3e5430a09dca",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eef64364cc745a778f6405399bf50f9a08706228bcd2692a1db0fa764b608f15"
+  },
+  "id": "30tJ1PrHaEQ1sEE7",
+  "tags": []
+}

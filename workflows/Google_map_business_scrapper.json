@@ -1,0 +1,1468 @@
+{
+  "name": "Google_map_business_scrapper",
+  "nodes": [
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -256,
+        1472
+      ],
+      "id": "bfa27879-0d2c-4b15-bf0d-e6b22019249f",
+      "name": "Wait",
+      "webhookId": "f1d257d4-6387-433f-9754-dbeb9569dee6"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        272,
+        928
+      ],
+      "id": "5b71f809-0128-49a3-b9b7-36c3c91acae3",
+      "name": "Wait1",
+      "webhookId": "43a69a73-77e2-465a-a40c-91df2cf7c6d6"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "results",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -1024,
+        992
+      ],
+      "id": "c41e365c-a5f9-4797-82b1-47b22ec2d3c7",
+      "name": "Split Out1"
+    },
+    {
+      "parameters": {
+        "content": "## Your google map research queries split to process them one by one",
+        "height": 440,
+        "width": 600
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1744,
+        688
+      ],
+      "id": "a4b104e3-2c61-4c51-a909-067f55033f6f",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## This get every business ID listed for your research",
+        "height": 300,
+        "width": 420,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1056,
+        1200
+      ],
+      "id": "f6845f98-76ef-4a25-981f-8772ab96d7b3",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "### This verify if they are results to give base on your search",
+        "height": 300,
+        "width": 220,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -608,
+        1200
+      ],
+      "id": "12a44367-b304-45da-ae58-d2b2545d3a12",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "### Always good to wait between each requests not to overload the api",
+        "height": 240
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        1360
+      ],
+      "id": "b52cfe5c-3fd3-49ff-94f7-b822bb113e6f",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "### Each requests can give up to 20 business, so we split them",
+        "height": 260,
+        "width": 220,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1088,
+        880
+      ],
+      "id": "9a4f1f9d-3e1b-427f-92c0-13ac704d476a",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "### Same as before, but this time we get the business information (website, reviews ect...)",
+        "height": 300,
+        "width": 1100,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        832
+      ],
+      "id": "cafeb44e-386b-4096-b020-69ae83dfab27",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Check if the business have infos",
+        "height": 280,
+        "width": 260
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        288
+      ],
+      "id": "6ed5a7c0-177d-444c-9fcb-8e44d108e6b7",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## Write all leads data into sheet",
+        "height": 280,
+        "width": 220,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        528,
+        288
+      ],
+      "id": "adc7fbd5-b2e3-478d-820b-9c96e24944ff",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=AI Query Expansion Agent Prompt\nYou are an AI-powered query expansion agent. Your task is to transform a user’s request into 10 diverse search queries optimized for Google Maps API.\n\nInstructions:\nExtract key elements from the user's request:\nBusiness type (e.g., \"lead agency,\" \"restaurant\").\nLocation (if provided).\nGenerate 10 diverse queries:\nSome with the location (if provided).\nSome without a location for broader searches.\nUse synonyms and variations to make them unique.\nFormat the response correctly:\nReturn a single string with queries separated by |.\nDo not include extra text—only the raw output string.\nExample Inputs & Outputs\nInput 1:\n📩 User Request:\n\"Give me lead agency in New York\"\n\nAI Response (String Only):\nplaintext\nCopy\nEdit\nLead Generation Agency near Brooklyn, NY|B2B Lead Agency in Manhattan|Outbound Lead Generation Services|Best Sales Prospecting Firms|B2C Lead Generation near Queens, NY|Business Lead Generation Experts|Cold Outreach Agencies|Digital Marketing & Lead Gen near The Bronx, NY|Top Demand Generation Companies|Email & LinkedIn Lead Agencies near Staten Island, NY\nInput 2:\n📩 User Request:\n\"Find me a software development company\"\n\nAI Response (String Only):\nplaintext\nCopy\nEdit\nTop Software Development Companies|Custom Software Developers|Best App Development Agencies|Enterprise Software Solutions|AI and Machine Learning Development|SaaS Development Experts|Full-Stack Development Firms|Web & Mobile App Development Companies|Agile Software Development Agencies|Cloud Application Development Services\nInput 3:\n📩 User Request:\n\"Give me a list of restaurants in Washington\"\n\nAI Response (String Only):\nplaintext\nCopy\nEdit\nBest Restaurants in Washington, DC|Fine Dining near Capitol Hill|Top-Rated Italian Restaurants|Affordable Places to Eat|Best Seafood Restaurants near Georgetown, DC|Popular Vegan Restaurants|Family-Friendly Dining Options|Trendy Restaurants for Foodies|Best Brunch Spots near National Mall|Casual Dining near Dupont Circle"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -1568,
+        800
+      ],
+      "id": "42f9b9d4-9110-4208-a61a-1ffaedd91d13",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1728,
+        800
+      ],
+      "id": "9d580295-5a34-4e8c-b26f-cd32caa70d07",
+      "name": "When chat message received",
+      "webhookId": "c5089610-de0f-4502-af0d-dce224de045c"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -1648,
+        992
+      ],
+      "id": "b1e49273-327c-4c93-a1a4-d430fe1520d8",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qdTtFvhpdfssCbLR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1520,
+        992
+      ],
+      "id": "0b5a06de-f9f6-4ee1-bd77-0357f95faae7",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the input data\nconst inputData = $input.first().json.output; \n\n// Ensure inputData is a string before splitting\nif (typeof inputData !== \"string\") {\n  throw new Error(\"Input data is not a valid string.\");\n}\n\n// Split the string into an array using \"|\"\nconst queriesArray = inputData.split(\"|\").map(query => query.trim());\n\n// Format output for n8n\nreturn queriesArray.map(query => ({\n  json: { query }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1264,
+        800
+      ],
+      "id": "05ebc395-39c7-473f-8b0b-2d3c09516464",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.repliq.co/v2/launchTemplate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"templateId\": \"aec8e70a\",\n  \"url\": \"{{ $('For_company_found').item.json.result.url }}\",\n  \"firstName\": \"{{$('For_company_found').item.json.result.name }}\",\n  \"email\": \"{{ $json.results.emails[0] }}\",\n\"webhook\":\"https://notiq.app.n8n.cloud/webhook/7226a381-0b45-4152-9f83-7f23cdfc6f66\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        592,
+        384
+      ],
+      "id": "85105084-5ead-4e7f-a332-45dff1816aea",
+      "name": "RepliQ_video",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "F109U7FDoSTDr21Q",
+          "name": "youtube transcript"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anymailfinder.com/v5.0/search/company.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"domain\": \"{{ $json.result.website }}\",\n  \"company_name\": \"{{ $json.result.name }}\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        112,
+        400
+      ],
+      "id": "b72084f1-888e-41cb-b36b-08798ad3856c",
+      "name": "Find_domain_emails",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "F109U7FDoSTDr21Q",
+          "name": "youtube transcript"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "97a56856-d2c6-45bf-97ef-033b46252afd",
+              "leftValue": "={{ $json.results.emails }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        320,
+        400
+      ],
+      "id": "d7f295d9-b2c5-4504-8e2c-988dae0013be",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1088,
+        400
+      ],
+      "id": "22f869fb-5daf-4fa6-b7bb-e58b6aa36a07",
+      "name": "Wait2",
+      "webhookId": "7b6dfe89-04bf-488a-a0fb-48877b573e1f"
+    },
+    {
+      "parameters": {
+        "url": "https://maps.googleapis.com/maps/api/place/textsearch/json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ $json.query }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -800,
+        1328
+      ],
+      "id": "0cda0489-8462-4853-9400-d3d17f1f2b8e",
+      "name": "Get_Business_id",
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "T5qW7yKLGaRsTrfZ",
+          "name": "Query Auth google search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -560,
+        912
+      ],
+      "id": "17850f2c-0197-42a7-9d3a-23fa6fce00a8",
+      "name": "For_each_id"
+    },
+    {
+      "parameters": {
+        "url": "https://maps.googleapis.com/maps/api/place/details/json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "place_id",
+              "value": "={{ $json.place_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        928
+      ],
+      "id": "7f0f25eb-cd4f-49d2-8a50-319427185a17",
+      "name": "Get_business_details",
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "T5qW7yKLGaRsTrfZ",
+          "name": "Query Auth google search"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -1040,
+        1312
+      ],
+      "id": "e4ab6031-1bf4-47e7-bd56-6dbd8924884f",
+      "name": "For_each_business"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -144,
+        384
+      ],
+      "id": "a98df1ff-9d4a-40b9-b6d2-1483a1adcd1a",
+      "name": "For_company_found"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1QEqo5Cy1F6ALwfdxlz6RPQy0G67Ce5H6Eqx-ZcvukOY",
+          "mode": "list",
+          "cachedResultName": "GoogleMapEmailScrapper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QEqo5Cy1F6ALwfdxlz6RPQy0G67Ce5H6Eqx-ZcvukOY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IxFbAeOD5RAFwkUdprx-sx78raPttg1G4p-K2EKXy3E/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone": "={{ $('For_company_found').item.json.result.formatted_phone_number }}",
+            "map url": "={{ $('For_company_found').item.json.result.url }}",
+            "business map id": "={{ $('For_company_found').item.json.result.place_id }}",
+            "name": "={{ $('For_company_found').item.json.result.name }}",
+            "website url": "={{ $('For_company_found').item.json.result.website }}",
+            "number of review": "={{ $json.result.user_ratings_total }}",
+            "review score": "={{ $('For_company_found').item.json.result.rating }}",
+            "sent to smartlead": "NO",
+            "last review": "={{ $('For_company_found').item.json.result.reviews[0].text }}",
+            "email 2": "NO",
+            "email 3": "NO",
+            "repliq id": "NO",
+            "repliq video link": "NO",
+            "repliq html": "NO",
+            "first name 1": "NO",
+            "first name 2": "NO",
+            "first name 3": "NO",
+            "email 1": "NO"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "business map id",
+              "displayName": "business map id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website url",
+              "displayName": "website url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "number of review",
+              "displayName": "number of review",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "review score",
+              "displayName": "review score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "last review",
+              "displayName": "last review",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "map url",
+              "displayName": "map url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email 1",
+              "displayName": "email 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first name 1",
+              "displayName": "first name 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email 2",
+              "displayName": "email 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first name 2",
+              "displayName": "first name 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email 3",
+              "displayName": "email 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first name 3",
+              "displayName": "first name 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repliq id",
+              "displayName": "repliq id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repliq video link",
+              "displayName": "repliq video link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repliq html",
+              "displayName": "repliq html",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sent to smartlead",
+              "displayName": "sent to smartlead",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        368,
+        640
+      ],
+      "id": "123a7aef-814d-4a89-9ede-b9113eff0470",
+      "name": "No_emails",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ixlQeqkv6etZGRXt",
+          "name": "599"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1QEqo5Cy1F6ALwfdxlz6RPQy0G67Ce5H6Eqx-ZcvukOY",
+          "mode": "list",
+          "cachedResultName": "GoogleMapEmailScrapper",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1QEqo5Cy1F6ALwfdxlz6RPQy0G67Ce5H6Eqx-ZcvukOY/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1IxFbAeOD5RAFwkUdprx-sx78raPttg1G4p-K2EKXy3E/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Phone": "={{ $('For_company_found').item.json.result.formatted_phone_number }}",
+            "map url": "={{ $('For_company_found').item.json.result.url }}",
+            "business map id": "={{ $('For_company_found').item.json.result.place_id }}",
+            "name": "={{ $('For_company_found').item.json.result.name }}",
+            "website url": "={{ $('For_company_found').item.json.result.website }}",
+            "number of review": "={{ $('For_company_found').item.json.result.user_ratings_total }}",
+            "review score": "={{ $('For_company_found').item.json.result.rating }}",
+            "repliq id": "={{ $json.id }}",
+            "last review": "={{ $('For_company_found').item.json.result.reviews[0].text }}",
+            "email 2": "={{ $('Find_domain_emails').item.json.results.emails[1] }}",
+            "email 3": "={{ $('Find_domain_emails').item.json.results.emails[2] }}",
+            "email 1": "={{ $('Find_domain_emails').item.json.results.emails[0] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "business map id",
+              "displayName": "business map id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "website url",
+              "displayName": "website url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "number of review",
+              "displayName": "number of review",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "review score",
+              "displayName": "review score",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "last review",
+              "displayName": "last review",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "map url",
+              "displayName": "map url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email 1",
+              "displayName": "email 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first name 1",
+              "displayName": "first name 1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email 2",
+              "displayName": "email 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first name 2",
+              "displayName": "first name 2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email 3",
+              "displayName": "email 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "first name 3",
+              "displayName": "first name 3",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repliq id",
+              "displayName": "repliq id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repliq video link",
+              "displayName": "repliq video link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "repliq html",
+              "displayName": "repliq html",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "sent to smartlead",
+              "displayName": "sent to smartlead",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        832,
+        384
+      ],
+      "id": "a2432f61-6e10-4322-96d0-aee41b5ad6b1",
+      "name": "Found_leads",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ixlQeqkv6etZGRXt",
+          "name": "599"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "1eac3ea6-f8c2-4822-8911-7c75697e5a6e",
+              "leftValue": "={{ $json.result.place_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "85cf4c72-efe6-4619-8b2b-5d9f49dcfd00",
+              "leftValue": "={{ $json.result.website }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -400,
+        384
+      ],
+      "id": "803be784-cb76-42bd-8d09-1ef005f8e0a8",
+      "name": "Filter_infos"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9b5e1138-d32f-4a74-9109-3300e8d2a1e1",
+              "leftValue": "={{ $json.place_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -288,
+        928
+      ],
+      "id": "17e9068f-3f83-4f31-a53f-daafa0c31c64",
+      "name": "Filter_id"
+    },
+    {
+      "parameters": {
+        "content": "### Update lead company that have no emails",
+        "height": 520,
+        "width": 200,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        304,
+        288
+      ],
+      "id": "68157f38-ed52-48ce-91de-8621127477d5",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "### Find multiple emails based on domain and company name",
+        "height": 280,
+        "width": 220,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        288
+      ],
+      "id": "e0cefc0e-0b2c-478f-b133-fbdd740b2695",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "079d5ff8-1042-4d82-b84a-9ee051e29f7a",
+              "leftValue": "={{ $json.results[0].business_status }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -560,
+        1344
+      ],
+      "id": "ae4b9144-7dca-4ca5-911d-ae4186bde020",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "15f80a34-423b-4ab6-a948-c7333b969c83",
+              "name": "response",
+              "value": "done",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        80
+      ],
+      "id": "3e593713-f039-419b-8a11-bc5df1682542",
+      "name": "Finish_the_process"
+    },
+    {
+      "parameters": {
+        "content": "## Finish the process",
+        "height": 240,
+        "width": 260,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c6630b1b-1218-41d6-93f4-a22fc1b9518f",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "maxItems": 5
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        912
+      ],
+      "id": "9d4aa15f-3fa1-4eb4-b55b-417e6f5baa3a",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "content": "### Limit number to test",
+        "height": 220,
+        "width": 190,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        848
+      ],
+      "id": "34962089-f22d-420c-9e3f-1e00cd4cf415",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "## Find lead emails from domain",
+        "height": 280,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        48,
+        288
+      ],
+      "id": "47c42d9e-1372-471a-ae60-3d49c7e1205a",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "## Save lead information",
+        "height": 280,
+        "width": 220,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        768,
+        288
+      ],
+      "id": "e4697eea-6f65-4c78-8968-2d71399232ef",
+      "name": "Sticky Note13"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "For_each_business",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "For_each_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out1": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "For_each_business",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RepliQ_video": {
+      "main": [
+        [
+          {
+            "node": "Found_leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find_domain_emails": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "RepliQ_video",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No_emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "For_company_found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_Business_id": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "For_each_id": {
+      "main": [
+        [
+          {
+            "node": "Filter_infos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Filter_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_business_details": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "For_each_business": {
+      "main": [
+        [
+          {
+            "node": "Split Out1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get_Business_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "For_company_found": {
+      "main": [
+        [
+          {
+            "node": "Finish_the_process",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Find_domain_emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No_emails": {
+      "main": [
+        [
+          {
+            "node": "For_company_found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Found_leads": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter_infos": {
+      "main": [
+        [
+          {
+            "node": "For_company_found",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter_id": {
+      "main": [
+        [
+          {
+            "node": "Get_business_details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "For_each_business",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "For_each_id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d61d78a2-6767-4306-9ebb-ed00d3b7b807",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "eef64364cc745a778f6405399bf50f9a08706228bcd2692a1db0fa764b608f15"
+  },
+  "id": "7FOPGf6BAc3SNbfy",
+  "tags": []
+}

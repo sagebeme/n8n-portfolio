@@ -26,13 +26,13 @@ A modern, responsive portfolio website showcasing workflow automation and API in
 ### Installation
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Development
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 The site will be available at `http://localhost:5173`
@@ -40,13 +40,13 @@ The site will be available at `http://localhost:5173`
 ### Build
 
 ```bash
-npm run build
+pnpm build
 ```
 
 ### Preview Production Build
 
 ```bash
-npm run preview
+pnpm run preview
 ```
 
 ## Project Structure
