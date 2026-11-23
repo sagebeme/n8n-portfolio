@@ -13,7 +13,7 @@ export const projects = [
       'AI-generated drafts for high-priority emails',
       'Automatic summarization of finance and promotional emails'
     ],
-    image: '/images/projects/Email Agent.png',
+    image: '/images/projects/email-agent.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -31,7 +31,7 @@ export const projects = [
       'Intelligent data extraction and enrichment',
       'Reduced prospecting time by 90%'
     ],
-    image: '/images/projects/AI Agent to Scrape Unlimited Leads From Google Search Results (No Code!).png',
+    image: '/images/projects/lead-generation-agent.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -49,7 +49,7 @@ export const projects = [
       'Intelligent report generation',
       '100% no-code implementation'
     ],
-    image: '/images/projects/AI Agent to be your Personal Assistant for Web Research (100% No-Code).png',
+    image: '/images/projects/web-research-agent.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -67,7 +67,7 @@ export const projects = [
       'Improved accuracy with knowledge base integration',
       'Enhanced user experience with multi-modal interaction'
     ],
-    image: '/images/projects/Chatbot-rag-voice-agent.png',
+    image: '/images/projects/chatbot-rag-voice.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -85,7 +85,7 @@ export const projects = [
       'Data enrichment and qualification',
       'Reduced manual lead research by 85%'
     ],
-    image: '/images/projects/N8n Lead Generation.png',
+    image: '/images/projects/n8n-lead-generation.png',
     demoLink: null,
     githubLink: null,
     featured: false
@@ -103,7 +103,7 @@ export const projects = [
       'Reduced manual data collection time',
       'Improved lead database quality'
     ],
-    image: '/images/projects/LinkedinProfileScrapper.png',
+    image: '/images/projects/linkedin-profile-scraper.png',
     demoLink: null,
     githubLink: null,
     featured: false
@@ -121,7 +121,7 @@ export const projects = [
       'Comprehensive business information extraction',
       'Reduced manual research time by 90%'
     ],
-    image: '/images/projects/Google_map_business_scrapper.png',
+    image: '/images/projects/google-map-business-scraper.png',
     demoLink: null,
     githubLink: null,
     featured: false
@@ -139,7 +139,7 @@ export const projects = [
       'Engagement tracking and analytics',
       'Reduced social media management time by 70%'
     ],
-    image: '/images/projects/Social Media Automation.png',
+    image: '/images/projects/social-media-automation.png',
     demoLink: null,
     githubLink: null,
     featured: false
