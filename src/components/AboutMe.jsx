@@ -5,7 +5,7 @@ const AboutMe = () => {
         <div className="about-content">
           <div className="about-text">
             <h2>About Me</h2>
-            <p className="about-location">📍 East Africa</p>
+            <p className="about-location">Based in East Africa</p>
             <p className="about-description">
               I'm an AI Agent expert specializing in building intelligent automation workflows and AI-powered agents 
               that transform business operations. I help startups and SMBs create autonomous systems using n8n, OpenAI, 
@@ -27,20 +27,7 @@ const AboutMe = () => {
             </div>
             <div className="skills">
               <h3>AI Agent & Automation Expertise</h3>
-              <div className="skills-list">
-                <span className="skill-tag">AI Agents</span>
-                <span className="skill-tag">Workflow Automation</span>
-                <span className="skill-tag">n8n</span>
-                <span className="skill-tag">OpenAI Integration</span>
-                <span className="skill-tag">AI-Powered Workflows</span>
-                <span className="skill-tag">Intelligent Automation</span>
-                <span className="skill-tag">Airtable</span>
-                <span className="skill-tag">API Integration</span>
-                <span className="skill-tag">HubSpot</span>
-                <span className="skill-tag">LinkedIn API</span>
-                <span className="skill-tag">Webhooks</span>
-                <span className="skill-tag">REST APIs</span>
-              </div>
+              <p className="skills-list">AI Agents, Workflow Automation, n8n, OpenAI Integration, AI-Powered Workflows, Intelligent Automation, Airtable, API Integration, HubSpot, LinkedIn API, Webhooks, REST APIs</p>
             </div>
           </div>
         </div>

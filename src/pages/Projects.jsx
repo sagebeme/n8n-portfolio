@@ -50,7 +50,6 @@ const Projects = () => {
                 </div>
               </div>
               <div className="project-info">
-                <span className="project-category">{project.category}</span>
                 <h3>{project.title}</h3>
                 <p>{project.shortDescription}</p>
                 <div className="project-tech">

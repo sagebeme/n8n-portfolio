@@ -29,7 +29,6 @@ const ProjectDetail = () => {
         </Link>
         <article className="project-detail">
           <div className="project-header">
-            <span className="project-category">{project.category}</span>
             <h1>{project.title}</h1>
             <p className="project-description">{project.description}</p>
           </div>
