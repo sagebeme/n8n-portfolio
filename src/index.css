@@ -1,42 +1,34 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* CSS Variables for Light Theme */
+/* CSS Variables for Light Theme
+   Neutrals are tinted very slightly toward the green accent. The one accent (deep green) is only for
+   links, the active nav item, focus rings and small data marks; buttons use ink. */
 :root[data-theme="light"] {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #f1f3f5;
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a5568;
-  --text-tertiary: #718096;
-  --accent-primary: #6366f1;
-  --accent-secondary: #8b5cf6;
-  --accent-hover: #4f46e5;
-  --border-color: #e2e8f0;
+  --bg-primary: #f9faf9;
+  --bg-secondary: #eff1ef;
+  --bg-tertiary: #e3e7e4;
+  --text-primary: #1a1c1b;
+  --text-secondary: #454a47;
+  --text-tertiary: #666c69;
+  --accent-primary: #17694f;
+  --accent-hover: #0f4e3a;
+  --border-color: #d9ded9;
   --card-bg: #ffffff;
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  --gradient-start: #6366f1;
-  --gradient-end: #8b5cf6;
 }
 
 /* CSS Variables for Dark Theme */
 :root[data-theme="dark"] {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --text-primary: #f1f5f9;
-  --text-secondary: #cbd5e1;
-  --text-tertiary: #94a3b8;
-  --accent-primary: #818cf8;
-  --accent-secondary: #a78bfa;
-  --accent-hover: #6366f1;
-  --border-color: #334155;
-  --card-bg: #1e293b;
-  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --card-shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3);
-  --gradient-start: #818cf8;
-  --gradient-end: #a78bfa;
+  --bg-primary: #141615;
+  --bg-secondary: #1c1f1d;
+  --bg-tertiary: #292d2a;
+  --text-primary: #edefed;
+  --text-secondary: #c0c5c2;
+  --text-tertiary: #979d99;
+  --accent-primary: #6cc9a6;
+  --accent-hover: #8fd8bc;
+  --border-color: #303431;
+  --card-bg: #1c1f1d;
 }
 
 /* Reset and Base Styles */
@@ -117,16 +109,9 @@ a:hover {
   top: 0;
   left: 0;
   right: 0;
-  background-color: var(--card-bg);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
-}
-
-:root[data-theme="dark"] .navbar {
-  background-color: rgba(30, 41, 59, 0.8);
+  background-color: var(--bg-primary);
 }
 
 .nav-container {
@@ -142,10 +127,7 @@ a:hover {
 .nav-logo {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
 }
 
 .nav-links {
@@ -176,7 +158,7 @@ a:hover {
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  background-color: var(--accent-primary);
   border-radius: 2px;
 }
 
@@ -456,8 +438,8 @@ a:hover {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  color: white;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
   border-radius: 0.5rem;
   font-weight: 600;
   text-decoration: none;
@@ -465,9 +447,8 @@ a:hover {
 }
 
 .cv-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-  color: white;
+  opacity: 0.85;
+  color: var(--bg-primary);
 }
 
 .skills h3 {
@@ -483,8 +464,8 @@ a:hover {
 
 .skill-tag {
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  color: white;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   border-radius: 2rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -531,13 +512,6 @@ a:hover {
   background-color: var(--card-bg);
   padding: 2rem;
   border-radius: 1rem;
-  box-shadow: var(--card-shadow);
-  transition: all 0.3s ease;
-}
-
-.service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
 }
 
 .service-icon {
@@ -559,7 +533,6 @@ a:hover {
   padding: 2rem;
   background-color: var(--card-bg);
   border-radius: 1rem;
-  box-shadow: var(--card-shadow);
 }
 
 .target-audience p {
@@ -634,9 +607,8 @@ a:hover {
 }
 
 .social-link:hover {
-  background-color: var(--accent-primary);
-  color: white;
-  transform: translateY(-2px);
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 .contact-form {
@@ -672,7 +644,6 @@ a:hover {
 .form-group textarea:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .form-group textarea {
@@ -682,8 +653,8 @@ a:hover {
 
 .submit-btn {
   padding: 0.875rem 2rem;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  color: white;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
   border: none;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -694,8 +665,7 @@ a:hover {
 }
 
 .submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  opacity: 0.85;
 }
 
 .form-status {
@@ -722,20 +692,17 @@ a:hover {
 }
 
 .project-card {
-  background-color: var(--card-bg);
+  background-color: var(--bg-secondary);
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: var(--card-shadow);
-  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: inherit;
 }
 
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
+.project-card:hover h3 {
+  text-decoration: underline;
 }
 
 .project-image-wrapper {
@@ -750,11 +717,6 @@ a:hover {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover .project-image-wrapper img {
-  transform: scale(1.05);
 }
 
 .project-placeholder {
@@ -901,8 +863,8 @@ a:hover {
 
 .tech-tag-large {
   padding: 0.5rem 1rem;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  color: white;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   border-radius: 2rem;
   font-size: 0.875rem;
   font-weight: 500;
@@ -938,8 +900,8 @@ a:hover {
 
 .project-link-btn {
   padding: 0.875rem 2rem;
-  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-  color: white;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
   border-radius: 0.5rem;
   font-weight: 600;
   transition: all 0.2s ease;
@@ -947,9 +909,8 @@ a:hover {
 }
 
 .project-link-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
-  color: white;
+  opacity: 0.85;
+  color: var(--bg-primary);
   }
 
 @media (max-width: 768px) {
