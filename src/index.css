@@ -308,6 +308,70 @@ a:hover {
   color: var(--text-secondary);
 }
 
+/* Featured workflows on the home page */
+.featured-section {
+  padding: 4rem 0;
+}
+
+.featured-section h2 {
+  margin-bottom: 2.5rem;
+}
+
+.featured-list {
+  display: grid;
+  gap: 4rem;
+}
+
+.featured-item {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
+  align-items: center;
+  color: inherit;
+}
+
+.featured-item:hover {
+  color: inherit;
+}
+
+.featured-item:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 6px;
+  border-radius: 0.75rem;
+}
+
+.featured-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+.featured-text p {
+  font-size: 1.125rem;
+}
+
+.featured-text .featured-tech {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.featured-more {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.featured-item:hover .featured-more {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .featured-item {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
 /* About Section */
 .about-section {
   padding: 4rem 0;

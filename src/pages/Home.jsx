@@ -1,4 +1,5 @@
 import Hero from '../components/Hero';
+import FeaturedProjects from '../components/FeaturedProjects';
 import AboutMe from '../components/AboutMe';
 import WhatIDo from '../components/WhatIDo';
 import ContactSection from '../components/ContactSection';
@@ -18,6 +19,7 @@ const Home = () => {
       <StructuredData />
       <main className="home-page">
         <Hero />
+        <FeaturedProjects />
         <AboutMe />
         <WhatIDo />
         <ContactSection />

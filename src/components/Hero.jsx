@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 
+// The first featured project is the home page's main picture.
+const heroProject = projects.find((project) => project.featured);
+
 const Hero = () => {
   return (
     <section className="hero-section">
@@ -14,16 +17,16 @@ const Hero = () => {
           See all {projects.length} workflows
         </Link>
         <figure className="hero-figure">
-          <Link to="/projects/email-agent">
+          <Link to={`/projects/${heroProject.id}`}>
             <img
-              src="/images/projects/email-agent.png"
-              alt="The AI Email Agent workflow open in the n8n editor"
+              src={heroProject.image}
+              alt={`${heroProject.title} workflow in the n8n editor`}
               width="1319"
               height="621"
               loading="eager"
             />
           </Link>
-          <figcaption>AI Email Agent, as built in n8n</figcaption>
+          <figcaption>{heroProject.title}, as built in n8n</figcaption>
         </figure>
       </div>
     </section>
