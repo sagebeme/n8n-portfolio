@@ -3,28 +3,8 @@ const AboutMe = () => {
     <section id="about" className="about-section">
       <div className="container">
         <div className="about-content">
-          <div className="about-image">
-            <img 
-              src="https://github.com/sagebeme.png" 
-              alt="sagebeme - AI Agent Expert & Workflow Automation Specialist" 
-              className="profile-photo"
-              loading="eager"
-              onError={(e) => {
-                // Fallback to placeholder if image doesn't exist
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'block';
-              }}
-            />
-            <div className="profile-placeholder" style={{ display: 'none' }}>
-              <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
-          </div>
           <div className="about-text">
             <h2>About Me</h2>
-            <h1 className="profile-name">sagebeme</h1>
             <p className="about-location">📍 East Africa</p>
             <p className="about-description">
               I'm an AI Agent expert specializing in building intelligent automation workflows and AI-powered agents 
