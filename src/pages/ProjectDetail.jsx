@@ -64,7 +64,7 @@ const ProjectDetail = () => {
               </div>
             </div>
             <div className="detail-section">
-              <h2>Key Outcomes</h2>
+              <h2>What it does</h2>
               <ul className="outcomes-list">
                 {project.outcomes.map((outcome, idx) => (
                   <li key={idx}>{outcome}</li>
