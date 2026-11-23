@@ -123,7 +123,7 @@ Update contact details in:
 
 ### Profile Photo
 
-The profile photo is automatically loaded from GitHub: `https://github.com/sagebeme.png`
+The home page has no profile photo; its main image is the AI Email Agent workflow screenshot.
 
 ### Projects
 

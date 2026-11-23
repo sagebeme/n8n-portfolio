@@ -8,12 +8,12 @@ export const projects = [
     shortDescription: 'AI agent for autonomous email classification, drafting, and response',
     techStack: ['n8n', 'OpenAI', 'Gmail API', 'Telegram', 'AI Agent'],
     outcomes: [
-      'Automated email classification with 95%+ accuracy',
-      'Reduced email response time by 80%',
+      'Sorts each new email into High Priority, Finance/Billing, Customer Support or Promotion',
+      'Sends a Telegram alert when a draft or reply is ready',
       'AI-generated drafts for high-priority emails',
       'Automatic summarization of finance and promotional emails'
     ],
-    image: '/images/projects/Email Agent.png',
+    image: '/images/projects/email-agent.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -29,9 +29,9 @@ export const projects = [
       'Automated lead discovery from Google Search',
       'Scalable lead generation without manual work',
       'Intelligent data extraction and enrichment',
-      'Reduced prospecting time by 90%'
+      'Pulls contact details from search results without manual copying'
     ],
-    image: '/images/projects/AI Agent to Scrape Unlimited Leads From Google Search Results (No Code!).png',
+    image: '/images/projects/lead-generation-agent.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -44,12 +44,12 @@ export const projects = [
     shortDescription: 'AI agent for autonomous web research and information synthesis',
     techStack: ['n8n', 'OpenAI', 'Web Search', 'AI Agent', 'No-Code'],
     outcomes: [
-      'Automated research workflows saving 15+ hours/week',
+      'Searches the web and writes up findings on request',
       'Comprehensive information gathering and synthesis',
       'Intelligent report generation',
       '100% no-code implementation'
     ],
-    image: '/images/projects/AI Agent to be your Personal Assistant for Web Research (100% No-Code).png',
+    image: '/images/projects/web-research-agent.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -67,7 +67,7 @@ export const projects = [
       'Improved accuracy with knowledge base integration',
       'Enhanced user experience with multi-modal interaction'
     ],
-    image: '/images/projects/Chatbot-rag-voice-agent.png',
+    image: '/images/projects/chatbot-rag-voice.png',
     demoLink: null,
     githubLink: null,
     featured: true
@@ -83,9 +83,9 @@ export const projects = [
       'Automated lead discovery from LinkedIn',
       'Streamlined form-based lead collection',
       'Data enrichment and qualification',
-      'Reduced manual lead research by 85%'
+      'Starts from a simple form submission'
     ],
-    image: '/images/projects/N8n Lead Generation.png',
+    image: '/images/projects/n8n-lead-generation.png',
     demoLink: null,
     githubLink: null,
     featured: false
@@ -103,7 +103,7 @@ export const projects = [
       'Reduced manual data collection time',
       'Improved lead database quality'
     ],
-    image: '/images/projects/LinkedinProfileScrapper.png',
+    image: '/images/projects/linkedin-profile-scraper.png',
     demoLink: null,
     githubLink: null,
     featured: false
@@ -119,9 +119,9 @@ export const projects = [
       'Automated business data collection',
       'Scalable local lead generation',
       'Comprehensive business information extraction',
-      'Reduced manual research time by 90%'
+      'Captures names, addresses, phone numbers, ratings and reviews'
     ],
-    image: '/images/projects/Google_map_business_scrapper.png',
+    image: '/images/projects/google-map-business-scraper.png',
     demoLink: null,
     githubLink: null,
     featured: false
@@ -137,9 +137,9 @@ export const projects = [
       'Automated content scheduling and posting',
       'Unified social media management',
       'Engagement tracking and analytics',
-      'Reduced social media management time by 70%'
+      'Schedules and posts content across platforms from one workflow'
     ],
-    image: '/images/projects/Social Media Automation.png',
+    image: '/images/projects/social-media-automation.png',
     demoLink: null,
     githubLink: null,
     featured: false
