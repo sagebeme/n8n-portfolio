@@ -67,24 +67,31 @@ body {
 }
 
 /* Typography */
+/* Hierarchy comes from size, not weight: one medium weight, tracking
+   tightens as type gets bigger. */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
   color: var(--text-primary);
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
   margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.25rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 1.5rem;
+  letter-spacing: -0.01em;
   margin-bottom: 0.75rem;
 }
 
@@ -126,7 +133,7 @@ a:hover {
 
 .nav-logo {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
