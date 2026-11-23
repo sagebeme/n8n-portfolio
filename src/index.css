@@ -222,7 +222,6 @@ a:hover {
 
 /* Page Headers */
 .page-header {
-  text-align: center;
   margin-bottom: 4rem;
   padding-top: 2rem;
 }
@@ -230,7 +229,6 @@ a:hover {
 .page-intro {
   font-size: 1.125rem;
   max-width: 700px;
-  margin: 0 auto;
   color: var(--text-secondary);
 }
 
@@ -514,7 +512,6 @@ a:hover {
 }
 
 .contact-section h2 {
-  text-align: center;
   margin-bottom: 3rem;
 }
 
@@ -523,7 +520,6 @@ a:hover {
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 .contact-info {
